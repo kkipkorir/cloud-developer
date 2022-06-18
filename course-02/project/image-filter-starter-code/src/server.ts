@@ -14,7 +14,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   app.use(bodyParser.json());
  
   //gets an image from a public url and filters it and returns the result
-  app.get("/filteredimage", async ( req, res) => {
+  app.get("/filteredimage", async ( req: express.Request, res: express.Response) => {
 
   //get Image url from the request
   let {  image_url: imageUrl } = req.query;
@@ -27,7 +27,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // send the resulting file in the response
   // deletes any files on the server on finish of the response
 try{
-  let imageFilterResult = await filterImageFromURL(imageUrl)
+  let imageFilterResult: string = await filterImageFromURL(imageUrl)
 
   return res.status(200).sendFile(imageFilterResult, (f) => {
      deleteLocalFiles([imageFilterResult])
